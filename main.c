@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #define N 6
+#define NEED_TO_WIN 5
 
 void drawBoard(char board[N][N]) {
   for (int i = 0; i < N + 2; i++) {
@@ -132,6 +133,83 @@ int insert(char board[N][N], int num, char val) {
   return 0;
 }
 
+int judge(char board[N][N]) {
+  //横
+  for(int i = 0; i < N; i++) {
+    for(int j = 0; j < N - NEED_TO_WIN + 1; j++) {
+      char ijColor = board[i][j];
+      if(ijColor == '.') continue;
+      char isWin = 1;
+      for(int k = j + 1; k < j + NEED_TO_WIN; k++) {
+        if(ijColor != board[i][k]) {
+          isWin = 0;
+          break;
+        }
+      }
+      if(isWin) {
+        printf("%cの勝利\n", ijColor);
+        return 1;
+      }
+    }
+  }
+  //横
+  for(int i = 0; i < N; i++) {
+    for(int j = 0; j < N - NEED_TO_WIN + 1; j++) {
+      char ijColor = board[j][i];
+      if(ijColor == '.') continue;
+      char isWin = 1;
+      for(int k = j + 1; k < j + NEED_TO_WIN; k++) {
+        if(ijColor != board[k][i]) {
+          isWin = 0;
+          break;
+        }
+      }
+      if(isWin) {
+        printf("%cの勝利\n", ijColor);
+        return 1;
+      }
+    }
+
+  }
+  //左上から右下のななめ
+  for(int i = 0; i < N - NEED_TO_WIN + 1; i++) {
+    for(int j = 0; j < N - NEED_TO_WIN + 1; j++) {
+      char ijColor = board[i][j];
+      if(ijColor == '.') continue;
+      char isWin = 1;
+      for(int k = 0; k < NEED_TO_WIN; k++) {
+        if(ijColor != board[i+k][j+k]) {
+          isWin = 0;
+          break;
+        }
+      }
+      if(isWin) {
+        printf("%cの勝利\n", ijColor);
+        return 1;
+      }
+    }
+  }
+  //左上から左下のななめ
+  for(int i = 0; i < N - NEED_TO_WIN + 1; i++) {
+    for(int j = NEED_TO_WIN - 1; j < N ; j++) {
+      char ijColor = board[i][j];
+      if(ijColor == '.') continue;
+      char isWin = 1;
+      for(int k = 0; k < NEED_TO_WIN; k++) {
+        if(ijColor != board[i+k][j-k]) {
+          isWin = 0;
+          break;
+        }
+      }
+      if(isWin) {
+        printf("%cの勝利\n", ijColor);
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
+
 int test() {
   char board[N][N];
 
@@ -190,11 +268,13 @@ int main() {
 
   char val = 'o';
   int num;
-  while (1) {
+  char finished = 0;
+  while (!finished) {
     printf("%c:", val);
     scanf("%d", &num);
     insert(board, num, val);
     drawBoard(board);
+    finished = judge(board);
 
     val = (val == 'o' ? 'x' : 'o');
   }
