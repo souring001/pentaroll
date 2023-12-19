@@ -210,6 +210,30 @@ int judge(char board[N][N]) {
   return 0;
 }
 
+void convertBoardToBinary(char board[N][N], long *result) {
+  result[0] = (long)0;
+  result[1] = (long)0;
+  for(int i = 0; i < N; i++) {
+    for(int j = 0; j < N; j++) {
+      if(board[i][j] == 'o') result[0] += (long)1 << i * N + j;
+      if(board[i][j] == 'x') result[1] += (long)1 << i * N + j;
+    }
+  }
+  printf("%ld %ld\n", result[0], result[1]);
+}
+
+
+void convertBinaryToBoard(char board[N][N], long result[2]) {
+  for(int i = 0; i < N; i++) {
+    for(int j = 0; j < N; j++) {
+      if(((long)1 << i * N + j) & result[0]) board[i][j] = 'o';
+      else if(((long)1 << i * N + j) & result[1]) board[i][j] = 'x';
+      else board[i][j] = '.';
+    }
+  }
+}
+
+
 int test() {
   char board[N][N];
 
@@ -273,7 +297,11 @@ int main() {
     printf("%c:", val);
     scanf("%d", &num);
     insert(board, num, val);
-    drawBoard(board);
+    long binary[2];
+    convertBoardToBinary(board, binary);
+    char board2[N][N];
+    convertBinaryToBoard(board2, binary);
+    drawBoard(board2);
     finished = judge(board);
 
     val = (val == 'o' ? 'x' : 'o');
