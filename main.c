@@ -8,7 +8,7 @@ bool isWhiteTurn;
 
 int main(void) {
   initBan();
-  initTest();
+  // initTest();
 
   while (!finished) {
     drawBan(ban);
