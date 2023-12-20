@@ -56,13 +56,11 @@ char maskBits(long bin, long mask) {
 
 
 void invMaskBits(long *bin, long mask, char buf) {
-    printBin(*bin);
     *bin &= ~mask;
     for (int i = 0; i < N*N; i++) {
         if ((mask >> i) & 1) {
-            if (buf & 0x20) *bin |= (1 << i);
+            if (buf & 0x20) *bin |= ((long)1 << i);
             buf = buf << 1;
         }
     }
-    printBin(*bin);
 }
