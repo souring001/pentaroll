@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -std=c99
 SRCS = main.c io.c test.c move.c pentaroll.c
 OBJS = $(SRCS:.c=.o)
 
-TARGET = fuji
+TARGET = fuji.out
 
 .PHONY: all clean
 
