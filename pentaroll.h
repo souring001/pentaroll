@@ -41,6 +41,9 @@ extern void initTest(void);
 extern bool checkInsert(Ban *ban, int num);
 extern void insert(Ban *ban, int num, bool isWhiteTurn);
 extern void insertAbove(Ban *ban, long mask, bool isWhiteTurn);
+extern void insertBottom(Ban *ban, long mask, bool isWhiteTurn);
+extern void insertLeft(Ban *ban, long mask, bool isWhiteTurn);
+extern void insertRight(Ban *ban, long mask, bool isWhiteTurn);
 
 /** tree.c */
 typedef struct node {
