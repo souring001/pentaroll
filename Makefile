@@ -1,0 +1,20 @@
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c99
+
+SRCS = main.c io.c test.c move.c pentaroll.c
+OBJS = $(SRCS:.c=.o)
+
+TARGET = fuji
+
+.PHONY: all clean
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) -o $@ $(OBJS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJS) $(TARGET) *.h~ *.c~
