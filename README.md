@@ -15,5 +15,5 @@ make clean
 ### Run
 
 ```
-./fuji
+./fuji.out
 ```
