@@ -64,3 +64,54 @@ void invMaskBits(long *bin, long mask, char buf) {
         }
     }
 }
+
+
+bool checkWinMask(long val, long mask) {
+    return (val & mask) == mask;
+}
+
+bool checkWinPlayer(long val) {
+    // 行
+    for(int i = 0; i < N; i++) {
+        for(int j = 0; j < N - NEED_TO_WIN + 1; j++) {
+            if(checkWinMask(val, rowMask << (j + i*N))) return true;
+        }
+    }
+    // 列
+    for(int i = 0; i < N; i++) {
+        for(int j = 0; j < N - NEED_TO_WIN + 1; j++) {
+            if(checkWinMask(val, colMask << (i + j*N))) return true;
+        }
+    }
+    // 斜め
+    for(int i = 0; i < N - NEED_TO_WIN + 1; i++) {
+        for(int j = 0; j < N - NEED_TO_WIN + 1; j++) {
+            if(checkWinMask(val, rightDigMask << (i + j*N)) || checkWinMask(val, leftDigMask << (i + j*N))) return true;
+        }
+    }
+
+    return false;
+}
+
+int checkWin(Ban *ban) {
+    if((ban->white & ban->black) == 0b111111111111111111111111111111111111) {
+        printf("引き分け!\n");
+        return 3;
+    }
+    if(checkWinPlayer(ban->black)) {
+        printf("黒の勝利!\n");
+        return 2;
+    }
+    if(checkWinPlayer(ban->white)) {
+        printf("白の勝利!\n");
+        return 1;
+    }
+    return 0;
+}
+
+Ban* copyBan(Ban *old) {
+    Ban *new = malloc(sizeof(Ban));
+    new->black = old->black;
+    new->white = old->white;
+    return new;
+}

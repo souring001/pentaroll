@@ -27,6 +27,8 @@ extern void initWinMask(void);
 extern void initFullMask(void);
 extern char maskBits(long bin, long mask);
 extern void invMaskBits(long *bin, long mask, char buf);
+extern int checkWin(Ban *ban);
+extern Ban* copyBan(Ban *old);
 
 /** io.c */ 
 extern void initBan(void);
@@ -51,3 +53,7 @@ typedef struct node {
 	struct node *branch;
 	struct node *next;
 } Node;
+
+/** weakai.c */
+extern bool veryweakAIInsert(Ban *ban, bool isWhiteTurn);
+extern bool weakAIInsert(Ban *ban, bool isWhiteTurn);
