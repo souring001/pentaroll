@@ -3,11 +3,17 @@
 ### Build
 
 ```
-gcc main.c
+make
+```
+
+### Clean
+
+```
+make clean
 ```
 
 ### Run
 
 ```
-./a.out
+./fuji.out
 ```
