@@ -98,11 +98,17 @@ int checkWin(Ban *ban) {
         printf("引き分け!\n");
         return 3;
     }
-    if(checkWinPlayer(ban->black)) {
+    bool checkBlack = checkWinPlayer(ban->black);
+    bool checkWhite = checkWinPlayer(ban->white);
+    if(checkBlack && checkWhite) {
+        printf("引き分け!\n");
+        return 3;
+    }
+    if(checkBlack) {
         printf("黒の勝利!\n");
         return 2;
     }
-    if(checkWinPlayer(ban->white)) {
+    if(checkWhite) {
         printf("白の勝利!\n");
         return 1;
     }
