@@ -10,9 +10,6 @@ typedef struct ban {
     long black;
 } Ban;
 
-extern Ban *ban;
-extern int count;
-extern bool finished;
 extern bool isWhiteTurn;
 extern long rowFull;
 extern long colFull;
@@ -31,7 +28,8 @@ extern int checkWin(Ban *ban);
 extern Ban* copyBan(Ban *old);
 
 /** io.c */ 
-extern void initBan(void);
+extern void initMasks(void);
+extern Ban* initBan(void);
 extern void drawBan(Ban *ban);
 extern bool usrInsert(Ban *ban, bool isWhiteTurn);
 extern void printBin(long bin);
@@ -57,3 +55,9 @@ typedef struct node {
 /** weakai.c */
 extern bool veryweakAIInsert(Ban *ban, bool isWhiteTurn);
 extern bool weakAIInsert(Ban *ban, bool isWhiteTurn);
+
+
+/** totsuka.c */
+extern bool shallowAIInsert(Ban *ban, bool isWhiteTurn);
+extern bool abAIInsert(Ban *ban, bool isWhiteTurn);
+extern void freeMemo(void);

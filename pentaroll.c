@@ -1,4 +1,5 @@
 #include<stdlib.h>
+#include<stdio.h>
 #include "pentaroll.h"
 
 long rowFull;
@@ -94,22 +95,18 @@ bool checkWinPlayer(long val) {
 }
 
 int checkWin(Ban *ban) {
-    if((ban->white & ban->black) == 0b111111111111111111111111111111111111) {
-        printf("引き分け!\n");
+    if((ban->white | ban->black) == 0b111111111111111111111111111111111111) {
         return 3;
     }
     bool checkBlack = checkWinPlayer(ban->black);
     bool checkWhite = checkWinPlayer(ban->white);
     if(checkBlack && checkWhite) {
-        printf("引き分け!\n");
         return 3;
     }
     if(checkBlack) {
-        printf("黒の勝利!\n");
         return 2;
     }
     if(checkWhite) {
-        printf("白の勝利!\n");
         return 1;
     }
     return 0;

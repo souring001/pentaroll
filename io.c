@@ -8,8 +8,12 @@ bool finished;
 bool isWhiteTurn;
 
 
+void initMasks() {
+    initWinMask();
+    initFullMask();
+}
 
-void initBan(void) {
+Ban* initBan(void) {
     /** intialize ban */
     ban = (Ban *)malloc(sizeof(Ban));
     if (ban == NULL) exit(EXIT_FAILURE);
@@ -19,13 +23,13 @@ void initBan(void) {
     count = 1;
     finished = false;
     isWhiteTurn = true;
-    initWinMask();
-    initFullMask();
+
+    return ban;
 }
 
 
 void drawBan(Ban *ban) {
-    system("clear");
+    // system("clear");
     char *board = ban2board(ban);
     for (int i = 0; i < N+2; i++) {
         if (i == 0) {

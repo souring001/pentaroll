@@ -17,7 +17,6 @@ bool veryweakAIInsert(Ban *ban, bool isWhiteTurn) {
     int num = (num + 1) % 24;
     allowInsert = checkInsert(ban, num+1);
   }
-  printf("%d %ld %ld\n",num,ban->white,ban->black);
   insert(ban, num, isWhiteTurn);
   return (isWhiteTurn ? false : true);
 }
@@ -57,7 +56,6 @@ bool weakAIInsert(Ban *ban, bool isWhiteTurn) {
     int num = (num + 1) % 24;
     allowInsert = checkInsert(ban, num+1);
   }
-  printf("%d %ld %ld\n",num,ban->white,ban->black);
   insert(ban, num+1, isWhiteTurn);
   return (isWhiteTurn ? false : true);
 }
